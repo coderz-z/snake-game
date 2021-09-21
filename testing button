@@ -4,17 +4,8 @@ import time
 import random
 
 SIZE = 30
-BACKGROUND_COLOR = (28, 26, 26)
-menu_button_img = pygame.image.load('resources/main_menu_button.jpg').convert_alpha()
-
-class Button:
-    def __init__(self, x, y, image):
-        self.image = image
-        self.rect = self.image.get_rect
-        self.rect.topleft = (x, y)
-
-    def draw_button(self):
-        self.image.blit(self.image, (self.rect.x, self.rect.y))
+BACKGROUND_COLOR = (16, 112, 135)
+menu_button = pygame.image.load("resources/main_menu_button .jpg")
 
 class Apple:
     def __init__(self, parent_screen):
@@ -98,11 +89,6 @@ class Game:
                 return True
         return False
 
-    def main_menu(self):
-        while True:
-
-            self.surface.fill(28, 26, 26)
-
     def display_score(self):
         font = pygame.font.SysFont('arial',30)
         score = font.render(f"Score: {self.snake.length}",True,(200,200,200))
@@ -136,18 +122,19 @@ class Game:
                 raise "Game over"
 
     def show_game_over(self):
-        menu_button = Button(200, 350, menu_button_img)
-        menu_button.draw()
         self.render_background()
         font = pygame.font.SysFont('arial', 30)
-        line1 = font.render(f"Game over! your score was: {self.snake.length}",True,(0, 255, 0))
+        line1 = font.render(f"Game over! your score was: {self.snake.length}",True,(25, 0, 0))
         self.surface.blit(line1, (200,300))
+
+        pygame.image.load("resources/main_menu_button.jpg")
+        self.surface.blit(menu_button, (200, 340))
+
         line3 = font.render(f"Thanks for playing", True, (0, 255, 0))
         self.surface.blit(line3, (200,400))
-        pygame.mixer.music.stop()
+        pygame.mixer.music.pause()
 
         pygame.display.flip()
-
 
     def reset(self):
         self.snake = Snake(self.surface, 1)
@@ -163,7 +150,7 @@ class Game:
                         running = False
 
                     if event.key == K_RETURN:
-                        pygame.mixer.music.play()
+                        pygame.mixer.music.unpause()
                         pause = False
 
                     if event.key == K_LEFT:
