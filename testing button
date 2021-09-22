@@ -3,7 +3,7 @@ from pygame.examples.headless_no_windows_needed import screen
 from pygame.locals import *
 import time
 import random
-
+import  sys
 
 SIZE = 30
 BACKGROUND_COLOR = (16, 112, 135)
@@ -13,7 +13,6 @@ snake = pygame.image.load("resources/block.jpg")
 DISPLAY_W, DISPLAY_H = 1020, 660
 button_surface = pygame.image.load("resources/main_menu_button .jpg")
 button_surface = pygame.transform.scale(button_surface, (157, 55))
-
 main_font = pygame.font.SysFont("arial", 30)
 
 class Apple:
@@ -203,10 +202,10 @@ class Game:
 						running = False
 
 					if event.type == pygame.MOUSEBUTTONDOWN:
-						button.checkForInput(pygame.mouse.get_pos())
+						game.checkForInput(pygame.mouse.get_pos())
 
-						button.update()
-						button.changeColor(pygame.mouse.get_pos())
+						game.update()
+						game.changeColor(pygame.mouse.get_pos())
 
 				elif event.type == QUIT:
 					running = False
